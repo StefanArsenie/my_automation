@@ -1,31 +1,47 @@
 package requests;
 
+import api_pom.dto.authentication.AuthenticationErrorResponseDTO;
 import api_pom.dto.authentication.AuthenticationRequestDTO;
 import api_pom.dto.authentication.AuthenticationTokenResponseDTO;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import utils.Constants;
+import lombok.Getter;
 import utils.UrlResources;
+
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class AuthenticationRequest {
 
-    public AuthenticationTokenResponseDTO authenticate(String clientName, String clientEmail) {
-        AuthenticationRequestDTO requestDTO = new AuthenticationRequestDTO();
+    AuthenticationRequestDTO requestDTO = new AuthenticationRequestDTO();
+
+    @Getter
+    private Response lastResponse;
+
+    public Object authenticate(String clientName, String clientEmail) {
         requestDTO.setClientName(clientName);
         requestDTO.setClientEmail(clientEmail);
 
-        Response response = RestAssured
+         lastResponse = RestAssured
                 .given()
                 .contentType(ContentType.JSON)
                 .baseUri(UrlResources.BASE_URI.getUrl())
                 .basePath(UrlResources.AUTH_ENDPOINT.getUrl())
                 .body(requestDTO).log().all()
                 .post()
-                .then().log().all()
+                .then()
+                .log().all()
                 .extract().response();
 
-        return response.as(AuthenticationTokenResponseDTO.class);
+        int statusCode = lastResponse.getStatusCode();
 
+        if(statusCode == 201) {
+            return lastResponse.as(AuthenticationTokenResponseDTO.class);
+        } else {
+            return lastResponse.as(AuthenticationErrorResponseDTO.class);
+        }
+    }
+    public int getStatusCode() {
+        return lastResponse.getStatusCode();
     }
 }
