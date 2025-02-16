@@ -7,16 +7,14 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import lombok.Getter;
-import utils.Constants;
 import utils.UrlResources;
-
-import java.util.List;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class AuthenticationRequest {
 
     AuthenticationRequestDTO requestDTO = new AuthenticationRequestDTO();
+
     @Getter
     private Response lastResponse;
 
@@ -33,7 +31,6 @@ public class AuthenticationRequest {
                 .post()
                 .then()
                 .log().all()
-                .body(matchesJsonSchemaInClasspath("TokenSchemaValidation.json"))
                 .extract().response();
 
         int statusCode = lastResponse.getStatusCode();

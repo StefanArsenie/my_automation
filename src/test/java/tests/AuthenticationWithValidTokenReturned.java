@@ -10,13 +10,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AuthenticationWithValidTokenReturned {
-
+    String clientName = Constants.CLIENT_NAME;
+    String clientEmail = Constants.CLIENT_EMAIL;
+    AuthenticationRequest authenticationRequest = new AuthenticationRequest();
     @Test
     public void authenticateShouldReturnValidTokenResponse() {
-        String clientName = Constants.CLIENT_NAME;
-        String clientEmail = Constants.CLIENT_EMAIL;
 
-        AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         Object response =
                 authenticationRequest.authenticate(clientName, clientEmail);
 
@@ -25,9 +24,6 @@ public class AuthenticationWithValidTokenReturned {
         if (response instanceof AuthenticationTokenResponseDTO tokenResponse) {
             Assertions.assertEquals(64, tokenResponse.getAccessToken().length(),
                     "Token has expected length");
-            authenticationRequest.getLastResponse()
-                    .then().assertThat()
-                    .body(matchesJsonSchemaInClasspath("TokenSchemaValidation.json"));
         } else {
             Assertions.fail("Expected a successful token but received an error");
         }

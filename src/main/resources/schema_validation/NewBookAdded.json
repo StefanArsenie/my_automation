@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "default": {},
+  "title": "Root Schema",
+  "required": [
+    "created",
+    "orderId"
+  ],
+  "properties": {
+    "created": {
+      "type": "boolean",
+      "default": false,
+      "title": "The created Schema",
+      "examples": [
+        true
+      ]
+    },
+    "orderId": {
+      "type": "string",
+      "default": "",
+      "title": "The orderId Schema",
+      "examples": [
+        "yppreK6KFcWPzr5tc6o3Y"
+      ]
+    }
+  },
+  "examples": [{
+    "created": true,
+    "orderId": "yppreK6KFcWPzr5tc6o3Y"
+  }]
+}

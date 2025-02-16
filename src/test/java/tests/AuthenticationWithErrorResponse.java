@@ -11,10 +11,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AuthenticationWithErrorResponse {
+    String clientName = Constants.CLIENT_NAME;
+
 
     @Test
     public void authenticationShouldReturn409ConflictError() {
-        String clientName = Constants.CLIENT_NAME;
+
         String clientEmail = Constants.FIXED_EMAIL;
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         Object response = authenticationRequest.authenticate(clientName, clientEmail);
@@ -29,7 +31,6 @@ public class AuthenticationWithErrorResponse {
     }
     @Test
     public void authenticationEmailWithoutComWordReturn400BadRequestError() {
-        String clientName = Constants.CLIENT_NAME;
         String clientEmail = Constants.DEFORMED_EMAIL_1;
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         Object response = authenticationRequest.authenticate(clientName, clientEmail);
@@ -45,7 +46,6 @@ public class AuthenticationWithErrorResponse {
     }
     @Test
     public void authenticationEmailWithoutAtSign400BadRequestError() {
-        String clientName = Constants.CLIENT_NAME;
         String clientEmail = Constants.DEFORMED_EMAIL_2;
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         Object response = authenticationRequest.authenticate(clientName, clientEmail);
@@ -61,7 +61,6 @@ public class AuthenticationWithErrorResponse {
     }
     @Test
     public void authenticationEmailStartingWithAtSignReturn400BadRequestError() {
-        String clientName = Constants.CLIENT_NAME;
         String clientEmail = Constants.DEFORMED_EMAIL_3;
         AuthenticationRequest authenticationRequest = new AuthenticationRequest();
         Object response = authenticationRequest.authenticate(clientName, clientEmail);
