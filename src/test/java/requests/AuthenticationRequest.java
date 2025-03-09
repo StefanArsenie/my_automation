@@ -9,15 +9,12 @@ import io.restassured.response.Response;
 import lombok.Getter;
 import utils.UrlResources;
 
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-
 public class AuthenticationRequest {
 
     AuthenticationRequestDTO requestDTO = new AuthenticationRequestDTO();
 
     @Getter
     private Response lastResponse;
-
     public Object authenticate(String clientName, String clientEmail) {
         requestDTO.setClientName(clientName);
         requestDTO.setClientEmail(clientEmail);
@@ -28,6 +25,7 @@ public class AuthenticationRequest {
                 .baseUri(UrlResources.BASE_URI.getUrl())
                 .basePath(UrlResources.AUTH_ENDPOINT.getUrl())
                 .body(requestDTO).log().all()
+                 .when()
                 .post()
                 .then()
                 .log().all()
@@ -37,6 +35,7 @@ public class AuthenticationRequest {
 
         if(statusCode == 201) {
             return lastResponse.as(AuthenticationTokenResponseDTO.class);
+
         } else {
             return lastResponse.as(AuthenticationErrorResponseDTO.class);
         }

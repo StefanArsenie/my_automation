@@ -4,17 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import requests.AuthenticationRequest;
 import utils.Constants;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AuthenticationWithValidTokenReturned {
+class AuthenticationWithValidTokenReturnedTest {
     String clientName = Constants.CLIENT_NAME;
     String clientEmail = Constants.CLIENT_EMAIL;
     AuthenticationRequest authenticationRequest = new AuthenticationRequest();
     @Test
-    public void authenticateShouldReturnValidTokenResponse() {
+    void authenticateShouldReturnValidTokenResponse() {
 
         Object response =
                 authenticationRequest.authenticate(clientName, clientEmail);
