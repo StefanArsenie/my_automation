@@ -1,6 +1,6 @@
 package tests;
 import api_pom.dto.authentication.AuthenticationTokenResponseDTO;
-import com.github.javafaker.Faker;
+import helper.Helper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import requests.AuthenticationRequest;
@@ -10,11 +10,10 @@ class AuthenticationWithValidTokenReturnedTest {
     AuthenticationRequest authenticationRequest = new AuthenticationRequest();
     @Test
     void authenticateShouldReturnValidTokenResponse() {
-        Faker email = new Faker();
-        String myEmail = email.internet().emailAddress();
+        Helper helper = new Helper();
 
         Object response =
-                authenticationRequest.authenticate(Constants.CLIENT_NAME, myEmail);
+                authenticationRequest.authenticate(Constants.CLIENT_NAME, helper.emailGeneration());
 
         if (response instanceof AuthenticationTokenResponseDTO tokenResponse) {
             Assertions.assertEquals(64, tokenResponse.getAccessToken().length(),

@@ -16,21 +16,28 @@ class GetBookByIdTest {
     GetBookByIdResponseDTO responseDTO;
     SubmitOrderBookResponseDTO responseSubmit;
     SubmitOrderBookRequest submitOrder;
-
-
+    String orderId;
 
     @BeforeEach
     void setUp() {
         submitOrder = new SubmitOrderBookRequest();
         responseSubmit = submitOrder.addNewBook(Constants.BOOK_ID, Constants.CLIENT_NAME);
-        String orderId = responseSubmit.getOrderId();
+        orderId = responseSubmit.getOrderId();
         log.info("Create orderId " + orderId);
         getBookByIdRequest = new GetBookByIdRequest();
         responseDTO = getBookByIdRequest.getBookById(orderId);
     }
-
     @Test
     void statusCodeIs200ForSpecificBookId() {
         Assertions.assertEquals(200, getBookByIdRequest.getStatusCode());
+    }
+    @Test
+    void verifyThatSameOrderIdIsReceivedInResponse() {
+        Assertions.assertEquals(orderId, responseSubmit.getOrderId());
+    }
+    @Test
+    void verifyThatSameBookIdIsReceivedInResponse() {
+        Assertions.assertEquals(6, responseDTO.getBookId());
+        log.info("dasdfaasdasdasd " + responseDTO.getBookId());
     }
 }

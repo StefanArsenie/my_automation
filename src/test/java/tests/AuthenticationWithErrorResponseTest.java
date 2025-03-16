@@ -10,8 +10,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class AuthenticationWithErrorResponseTest {
     String clientName = Constants.CLIENT_NAME;
-
-
     @Test
     void authenticationShouldReturn409ConflictError() {
 

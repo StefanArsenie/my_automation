@@ -2,6 +2,8 @@ package utils;
 
 public class Constants {
 
+
+
     public static final String CONTENT_TYPE = "application/json";
     public static final String CLIENT_NAME = "Stefan";
     public static final String FIXED_EMAIL = "testing569@example.com";

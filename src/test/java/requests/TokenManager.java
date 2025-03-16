@@ -2,6 +2,7 @@ package requests;
 
 import api_pom.dto.authentication.AuthenticationRequestDTO;
 import api_pom.dto.authentication.AuthenticationTokenResponseDTO;
+import helper.Helper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -15,7 +16,7 @@ import utils.UrlResources;
 public class TokenManager {
 
     public static String myToken;
-
+    static Helper helper = new Helper();
     public static String accessToken() {
         if(myToken == null) {
             authenticateAndSetToken();
@@ -25,7 +26,7 @@ public class TokenManager {
     private static void authenticateAndSetToken() {
         AuthenticationRequestDTO requestDTO = new AuthenticationRequestDTO();
         requestDTO.setClientName(Constants.CLIENT_NAME);
-        requestDTO.setClientEmail(Constants.);
+        requestDTO.setClientEmail(helper.emailGeneration());
 
         Response response = RestAssured
                 .given()
