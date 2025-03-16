@@ -25,7 +25,7 @@ public class TokenManager {
     private static void authenticateAndSetToken() {
         AuthenticationRequestDTO requestDTO = new AuthenticationRequestDTO();
         requestDTO.setClientName(Constants.CLIENT_NAME);
-        requestDTO.setClientEmail(Constants.CLIENT_EMAIL);
+        requestDTO.setClientEmail(Constants.);
 
         Response response = RestAssured
                 .given()

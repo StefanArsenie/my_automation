@@ -1,7 +1,9 @@
 package utils;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+@AllArgsConstructor
 public enum UrlResources {
 
     BASE_URI("https://simple-books-api.glitch.me"),
@@ -11,9 +13,6 @@ public enum UrlResources {
 
     @Getter
     private final String url;
-    UrlResources (String endpoint) {
-        this.url = endpoint;
-    }
 }
 
 

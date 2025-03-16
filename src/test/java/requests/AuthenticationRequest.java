@@ -25,7 +25,6 @@ public class AuthenticationRequest {
                 .baseUri(UrlResources.BASE_URI.getUrl())
                 .basePath(UrlResources.AUTH_ENDPOINT.getUrl())
                 .body(requestDTO).log().all()
-                 .when()
                 .post()
                 .then()
                 .log().all()

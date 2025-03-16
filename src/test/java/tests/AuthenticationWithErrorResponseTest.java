@@ -63,8 +63,7 @@ class AuthenticationWithErrorResponseTest {
 
         assertThat(400, equalTo(authenticationRequest.getStatusCode()));
 
-        if (response instanceof AuthenticationErrorResponseDTO) {
-            AuthenticationErrorResponseDTO errorResponse = (AuthenticationErrorResponseDTO) response;
+        if (response instanceof AuthenticationErrorResponseDTO errorResponse) {
             assertThat("Invalid or missing client email.", equalTo(errorResponse.getError()));
         } else {
             Assertions.fail("Expected an error but received a success token response");
