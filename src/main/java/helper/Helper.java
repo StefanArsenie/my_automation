@@ -7,7 +7,6 @@ public class Helper {
     public String emailGeneration() {
         return faker.internet().emailAddress();
     }
-
     public String firstNameGeneration() {
         return faker.name().firstName();
     }
